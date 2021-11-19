@@ -39,9 +39,10 @@ let hybrid_array = mpg_data.filter(car => car.hybrid === true);
 
 export const allCarStats = {
     avgMpg: {city: (city_array.reduce((a, b) => a + b, 0))/city_array.length, highway: (highway_array.reduce((a, b) => a + b, 0))/highway_array.length},
-    allYearStats: getStatistics([...new Set(year_array)]),
+    allYearStats: getStatistics(year_array),
     ratioHybrids: hybrid_array.length/mpg_data.length,
 };
+
 
 
 
