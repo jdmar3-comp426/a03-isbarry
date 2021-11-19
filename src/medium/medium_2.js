@@ -207,4 +207,8 @@ export function getMpgByYearAndHybrid(cars){
   });
   return list;
 }
- console.log(getMpgByYearAndHybrid(mpg_data));
+
+export const moreStats = {
+  makerHybrids: result,
+  avgMpgByYearAndHybrid: getMpgByYearAndHybrid(mpg_data)
+};

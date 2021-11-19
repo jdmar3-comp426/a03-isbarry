@@ -55,5 +55,13 @@ export function maxAndMin(numbers) {
  *
  */
 export function countArray(array) {
-
+    var value = new Object();
+    for (var x = 0; x < array.length; x++) {
+        if (value[array[x]] == null) {
+            value[array[x]] = 1;
+        } else {
+            value[array[x]] += 1;
+        }
+    }
+    return value;
 }
