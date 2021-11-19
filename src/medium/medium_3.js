@@ -61,7 +61,7 @@ export function searchMpg(car_data, minCity, minHighway) {
     return arr.sort(compareHighwayMpg);
 }
 
-console.log(searchMpg(mpg_data, 30, 30));
+
 
 /**
  * Find all cars where 'id' contains the search term below.
