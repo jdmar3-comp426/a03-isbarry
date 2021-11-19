@@ -55,7 +55,7 @@ export function getStatistics(array) {
         median: getMedian(array),
         min: Math.min(...array), 
         max: Math.max(...array),
-        variance: Math.variance(array),
+        variance: variance(array, array.reduce((a, b) => a + b) / array.length),
         standard_deviation: Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / array.length)
         
 
