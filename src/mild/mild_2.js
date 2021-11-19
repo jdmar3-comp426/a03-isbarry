@@ -38,7 +38,7 @@ export function identifyArray(array) {
 return arr;
 }
 
-console.log(identifyArray(['some', 3, [3, 4], false]))
+
 
 /**
  * mutates the object that is passed in.
@@ -84,14 +84,6 @@ export function removeKeyNonDestructive(object, key) {
    return rest;
 }
 
-let obj = {
-   name: 'Mr. Boss',
-   title: 'boss',
-   age: 33,
-   password: 'pass123'
-};
-
-//console.log(removeKeyNonDestructive(obj, 'password'));
 
 /**
  * Remove and return the listed keys. Without mutating the object passed in.
