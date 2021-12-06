@@ -1,3 +1,4 @@
+
 /**
  *
  * @param {number} a
@@ -8,11 +9,9 @@
  * returns: '3 + 4 = 7'
  * see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
  */
-export function sumToString(a, b) {
-
+ export function sumToString(a, b) {
+    return `${a} + ${b} = ${a + b}`;
 }
-
-
 /**
  *
  * @param {number} startNumber
@@ -24,9 +23,16 @@ export function sumToString(a, b) {
  *
  */
 export function getIncreasingArray(startNumber, endNumber) {
+    let arr = new Array();
+    var input = 0;
+    for(let i = 0; startNumber + i < endNumber + 1; i++){
+        input = startNumber + i;
+        arr.push(input);
 
+    }
+    return arr;
 }
-
+//console.log(getIncreasingArray(4, 8))
 /**
  *
  * @param {number[]} numbers
@@ -35,9 +41,9 @@ export function getIncreasingArray(startNumber, endNumber) {
  * and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
  */
 export function maxAndMin(numbers) {
-
+    return {max: Math.max(...numbers), min: Math.min(...numbers)}
 }
-
+//console.log(maxAndMin([4,5,7,2,3,5,8,9]))
 /**
  *
  * @param array - An array of any primitive type
@@ -45,9 +51,17 @@ export function maxAndMin(numbers) {
  * and the value was the number of times it occurred.
  *
  * example: countArray([3, 6, 3, 2, 2, 3, 'some', 'hello', 'some', [1, 2]])
- * returns: {'2': 2, '3': 3, '6': 1, some: 2, hello: 1, '1,2': 1}
+ * returns: {'2': 2, '3': 3, '6': 1, some: 2, hello: 1,  '1,2': 1 }
  *
  */
 export function countArray(array) {
-
+    var value = new Object();
+    for (var x = 0; x < array.length; x++) {
+        if (value[array[x]] == null) {
+            value[array[x]] = 1;
+        } else {
+            value[array[x]] += 1;
+        }
+    }
+    return value;
 }

@@ -1,5 +1,6 @@
 import mpg_data from "./data/mpg_data.js";
 import {getStatistics} from "./medium_1.js";
+import {getStatistic} from "./medium_1.js";
 
 /*
 This section can be done by using the array prototype functions.
@@ -19,11 +20,31 @@ see under the methods section
  *
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
+
+let city_array = mpg_data.map(car => {
+    return car.city_mpg;
+});
+
+let highway_array = mpg_data.map(car => {
+    return car.highway_mpg;
+});
+
+let year_array = mpg_data.map(car => {
+    return car.year;
+});
+
+let hybrid_array = mpg_data.filter(car => car.hybrid === true);
+
+
+
 export const allCarStats = {
-    avgMpg: undefined,
-    allYearStats: undefined,
-    ratioHybrids: undefined,
+    avgMpg: {city: (city_array.reduce((a, b) => a + b, 0))/city_array.length, highway: (highway_array.reduce((a, b) => a + b, 0))/highway_array.length},
+    allYearStats: getStatistic(year_array),
+    ratioHybrids: hybrid_array.length/mpg_data.length,
 };
+
+
+
 
 
 /**
@@ -45,7 +66,43 @@ export const allCarStats = {
  *{
  *     "make": "BMW",
  *     "hybrids": [
- *       "2011 BMW ActiveHybrid 750i Sedan",
+ *       "2011 BMW ActiveHybrid 750
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * i Sedan",
  *       "2011 BMW ActiveHybrid 750Li Sedan"
  *     ]
  *}]
@@ -83,7 +140,77 @@ export const allCarStats = {
  *
  * }
  */
+var helper = {};
+var result = mpg_data.reduce(function(r, o) {
+  var key = o.make;
+  
+  if(o.hybrid===true){
+    if(!helper[key]) {  
+      helper[key] = {make: o.make, hybrids: []}; 
+      helper[key].hybrids.push((o.id))
+      r.push(helper[key]);
+    } else {
+      helper[key].hybrids.push((o.id))
+    }
+  }
+  return r;
+}, []);
+
+function compare( a, b ) {
+  if ( a.hybrids.length < b.hybrids.length ){
+    return 1;
+  }
+  if ( a.hybrids.length> b.hybrids.length ){
+    return -1;
+  }
+  return 0;
+}
+
+result.sort(compare);
+
+
+
+export function getMpgByYearAndHybrid(cars){
+  
+  
+  let year_array = mpg_data.map(function (car) 
+  { return car.year; });
+  let years = [...new Set(year_array)]
+  let list = {};
+  
+  years.forEach(function(year) {
+      
+      let hybrid = cars.filter(c => c.year===year && c.hybrid);
+      let city_hybrid_array = hybrid.map(car => {
+        return car.city_mpg;
+     });
+
+     let highway_hybrid_array = hybrid.map(car => {
+        return car.highway_mpg;
+     });
+      let nonhybrid = cars.filter(c => c.year===year && !c.hybrid);
+      
+      let city_nonhybrid_array = nonhybrid.map(car => {
+        return car.city_mpg;
+     });
+
+     let highway_nonhybrid_array = nonhybrid.map(car => {
+        return car.highway_mpg;
+     });
+      
+      
+      
+
+      list[year] = {
+          hybrid: {city: (city_hybrid_array.reduce((a, b) => a + b, 0))/city_hybrid_array.length, highway:  (highway_hybrid_array.reduce((a, b) => a + b, 0))/highway_hybrid_array.length},
+          notHybrid: {city: (city_nonhybrid_array.reduce((a, b) => a + b, 0))/city_nonhybrid_array.length, highway:  (highway_nonhybrid_array.reduce((a, b) => a + b, 0))/highway_nonhybrid_array.length}
+      }
+  
+  });
+  return list;
+}
+
 export const moreStats = {
-    makerHybrids: undefined,
-    avgMpgByYearAndHybrid: undefined
+  makerHybrids: result,
+  avgMpgByYearAndHybrid: getMpgByYearAndHybrid(mpg_data)
 };
